@@ -1,5 +1,8 @@
 package fi.haagahelia.employee_management_system_khoiphan.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,4 +61,16 @@ public class EmployeeController {
         repository.deleteById(id);
         return "redirect:../employeelist";
     }
+
+       // REST - get all books
+       @GetMapping("/employees")
+       public @ResponseBody List<Employee> employees(){
+           return (List<Employee>) repository.findAll();
+       }
+   
+       // REST - get book by id
+       @GetMapping("/employee/{id}")
+       public @ResponseBody Optional<Employee> employeeById(@PathVariable("id") Long id){
+           return repository.findById(id);
+       }
 }
