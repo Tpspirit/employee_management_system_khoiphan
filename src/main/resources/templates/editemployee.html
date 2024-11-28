@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit</title>
+  </head>
+  <body>
+    <h1>Edit book</h1>
+    <form action="#" th:action="@{/add}" th:object="${employee}" method="post">
+      <input type="hidden" th:field="*{id}" />
+      <label for=""> Firstname</label>
+      <input type="text" th:field="*{firstname}" />
+      <label for="">Lastname</label>
+      <input type="text" th:field="*{lastname}" />
+      <label for="">Email</label>
+      <input type="text" th:field="*{email}" />
+      <label for="">Position</label>
+      <input type="text" th:field="*{position}" />
+      <label for="">Salary</label>
+      <input type="text" th:field="*{salary}" />
+      <label for="">Department</label>
+      <select name="" id="" th:field="*{department}" class="form-control">
+        <option
+          th:each="department : ${departments}"
+          th:value="${department.departmentid}"
+          th:text="${department.name}"
+        ></option>
+      </select>
+      <input type="submit" value="Save" />
+    </form>
+  </body>
+</html>
