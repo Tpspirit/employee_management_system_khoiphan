@@ -13,6 +13,8 @@ import fi.haagahelia.employee_management_system_khoiphan.domain.Department;
 import fi.haagahelia.employee_management_system_khoiphan.domain.DepartmentRepository;
 import fi.haagahelia.employee_management_system_khoiphan.domain.Employee;
 import fi.haagahelia.employee_management_system_khoiphan.domain.EmployeeRepository;
+import fi.haagahelia.employee_management_system_khoiphan.domain.User;
+import fi.haagahelia.employee_management_system_khoiphan.domain.UserRepository;
 
 @SpringBootApplication
 public class EmployeeManagementSystemKhoiphanApplication {
@@ -24,7 +26,7 @@ public class EmployeeManagementSystemKhoiphanApplication {
 	}
 
 	@Bean
-	public CommandLineRunner employeeDemo(EmployeeRepository repository, DepartmentRepository departmentrepository){
+	public CommandLineRunner employeeDemo(EmployeeRepository repository, DepartmentRepository departmentrepository, UserRepository uRepository){
 		return (args) -> {
 
 			log.info("Create some departments.");
@@ -51,6 +53,20 @@ public class EmployeeManagementSystemKhoiphanApplication {
 				log.info(employee.toString());
 			}
 
+
+			log.info("Fetch all books.");
+			for(Employee employee : repository.findAll()){
+				log.info(employee.toString());
+			}
+
+			log.info("Save some users.");
+			User user1 = new User("user", "$2a$10$5eota6DvrUlNFvzBwbVgO.a1UF4CCdw9wCgVAB8IfAauxnsVNxxje", "user@email.com", "USER");
+			User admin = new User("admin","$2a$10$PN6dyQHTqf8exRftszQvXuzn9JrG4NQp76r5PMAbFnU7sUgvSVQT.", "admin@email.com","ADMIN");
+			
+			// user1 - username: user password: user
+			uRepository.save(user1); 
+			// admin - username: admin password: admin
+			uRepository.save(admin);
 		};
 	}
 }
