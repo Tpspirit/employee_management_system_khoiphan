@@ -1,15 +1,27 @@
 package fi.haagahelia.employee_management_system_khoiphan.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fi.haagahelia.employee_management_system_khoiphan.domain.DepartmentRepository;
+import fi.haagahelia.employee_management_system_khoiphan.domain.EmployeeRepository;
+
 @Controller
-@ResponseBody
 public class EmployeeController {
 
-    @GetMapping("/")
-    public String index(){
-        return "This is main page. Progress on going...";
+    @Autowired
+    private EmployeeRepository repository;
+
+    @Autowired
+    private DepartmentRepository categoryrepository;
+    
+
+    @GetMapping({"/","/employeelist"})
+    public String employeelist(Model model){
+        model.addAttribute("employees", repository.findAll());
+        return "employeelist";
     }
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employeelist</title>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="css/bootstrap.min.css"
+      th:href="@{css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <h1>Employees</h1>
+    <table class="table table-striped">
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Position</th>
+        <th>Salary</th>
+        <th>Department</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr th:each="employee : ${employees}">
+        <td th:text="${employee.firstname}"></td>
+        <td th:text="${employee.lastname}"></td>
+        <td th:text="${employee.email}"></td>
+        <td th:text="${employee.position}"></td>
+        <td th:text="${employee.salary}"></td>
+        <td th:text="${employee.department.name}"></td>
+      </tr>
+    </table>
+  </body>
+</html>
